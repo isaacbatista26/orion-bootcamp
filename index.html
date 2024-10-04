@@ -188,17 +188,20 @@ let lista = [
   <h2>Função que muda o nome ou a bio pelo id (Imperativo)</h2>
   <p>Esta função pode ser testada no console do navegador da seguinte forma:<span>changeNameOrBioByIdImperative(2, "Rafaella", "Programadora Fullstack")</span></p>
   <pre>const changeNameOrBioByIdImperative = (id: number, name?: string, bio?: string) => {
+    if(name === undefined && bio === undefined){
+        return lista;
+    }
     for(let i = 0; i < lista.length; i++){
-        if(lista[i].id === id) {
-            if (name !== undefined) {
+        if (lista[i].id === id) {
+            if(name !== undefined) {
                 lista[i].name = name;
             }
-            if (bio !== undefined) {
+            if(bio !== undefined){
                 lista[i].bio = bio;
             }
+            return lista
         }
     }
-    return lista
 }</pre>
 
 
@@ -226,7 +229,7 @@ form.addEventListener('submit', function (event) {
     resultElement.textContent = 'A palavra tem ' + vowels + ' vogais.';
 });
 
-    var __assign = (this && this.__assign) || function () {
+var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
             s = arguments[i];
@@ -289,6 +292,9 @@ var changeNameOrBioByIdFunctional = function (id, name, bio) {
 };
 // d) Imperativo
 var changeNameOrBioByIdImperative = function (id, name, bio) {
+    if (name === undefined && bio === undefined) {
+        return lista;
+    }
     for (var i = 0; i < lista.length; i++) {
         if (lista[i].id === id) {
             if (name !== undefined) {
@@ -297,12 +303,7 @@ var changeNameOrBioByIdImperative = function (id, name, bio) {
             if (bio !== undefined) {
                 lista[i].bio = bio;
             }
+            return lista;
         }
     }
-    return lista;
 };
-
-  </script>
-</body>
-
-</html>
