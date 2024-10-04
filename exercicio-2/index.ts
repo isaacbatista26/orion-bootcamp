@@ -7,42 +7,31 @@ let lista = [
 // a) Funcional
 const getBioByIdFunctional = (id: number) => {
     let people = lista.find(item => item.id === id);
-    let bio = people?.bio;
-    return bio
+    return people?.bio;
 }
-
 
 // a) Imperativo
 const getBioByIdImperative = (id: number) => {
-    let bio = '';
     for(let i = 0; i < lista.length; i++){
         if (lista[i].id === id) {
-            bio = lista[i].bio;
-            break;
+            return lista[i].bio;
         }
     }
-    return bio;
 }
-
 
 // b) Funcional
 const getNameByIdFunctional = (id: number) => {
     let people = lista.find(item => item.id === id);
-    let name = people?.name;
-    return name;
+    return people?.name;
 }
 
 // b) Imperativo
 const getNameByIdImperative = (id: number) => {
-    let name = '';
-    
     for(let i = 0; i < lista.length; i++){
         if(lista[i].id === id) {
-            name = lista[i].name;
-            break;
+            return lista[i].name;
         }
     }
-    return name;
 }
 
 
@@ -58,31 +47,14 @@ const deleteByIdImperative = (id: number) => {
     for(let i = 0; i < lista.length; i++){
         if(lista[i].id === id) {
             lista.splice(i, 1);
-            break;
+            return lista
         }
     }
-    return lista
 }
 
-
 // d) Funcional
-const updatePerson = (person: { id: number; name: string; bio: string }, name?: string, bio?: string) => {
-    return {
-        ...person,
-        name: name !== undefined ? name : person.name,
-        bio: bio !== undefined ? bio : person.bio
-    };
-};
 const changeNameOrBioByIdFunctional = (id: number, name?: string, bio?: string) => {
-    const people = lista.find(item => item.id === id);
-    
-    if (!people) {
-        return lista;
-    }
-    
-    const updatedPerson = updatePerson(people, name, bio);
-    
-    return lista.map(person => person.id === id ? updatedPerson : person);
+    return lista.map(person => person.id === id ? { ...person, name: name ?? person.name, bio: bio ?? person.bio } : person )
 };
 
 // d) Imperativo
