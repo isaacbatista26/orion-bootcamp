@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador</title>
+</head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+
+  pre {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  input {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #8328a7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #611a81;
+  }
+
+  span {
+    color: #9947be;
+  }
+
+  #result {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+</style>
+
+<body>
+  <h1>Exercício 1 - Contador</h1>
+
+  <p>Código da função:</p>
+
+  <pre>
+const vowelCounter = (word: string): number => {
+  var counter = 0;
+
+  // tratamento de vogais acentuadas
+  var vowels = "aeiouâêîôûáéíóúàèìòùãẽĩõũ";
+
+  for (var i of word.toLowerCase()) {
+    if (vowels.includes(i)) {
+      counter += 1;
+    }
+  }
+  return counter;
+}
+
+const form = <HTMLFormElement>document.getElementById("form");
+const input = <HTMLInputElement>document.getElementById('word');
+const resultElement = <HTMLElement>document.getElementById('result');
+
+form.addEventListener('submit', function (event: Event) {
+  event.preventDefault();
+
+  const word: string = input.value;
+  const vowels: number = vowelCounter(word);
+
+  resultElement.textContent = 'A palavra tem ' + vowels + ' vogais.';
+})</pre>
+
+
+  <form id="form">
+    <label for="word">Digite uma palavra:</label>
+    <input type="text" id="word" name="word" required>
+    <button type="submit">Contar Vogais</button>
+  </form>
+
+  <p id="result"></p>
+
+
+
+  <h1>Exercício 2 - <span>Os resultados devem ser vistos através do console</span></h1>
+
+  <p>Lista de pessoas:</p>
+
+  <pre>
+let lista = [
+  { 
+    "id": 1, 
+    "name": "Ada Lovelace", 
+    "bio": "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina" 
+  },
+  { 
+    "id": 2, 
+    "name": "Alan Turing", 
+    "bio": "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial" 
+  },
+  { 
+    "id": 3, 
+    "name": "Nikola Tesla", 
+    "bio": "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada." 
+  },
+  { 
+    "id": 4, 
+    "name": "Nicolau Copérnico", 
+    "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar." 
+  }
+];</pre>
+
+  <p>Função que retorna a bio (Funcional): <span>getBioByIdFunctional(id)</span></p>
+
+  <pre>
+    const getBioByIdFunctional = (id: number) => {
+      let people = lista.find(item => item.id === id);
+      let bio = people?.bio;
+      return bio
+  }</pre>
+
+  <p>Função que retorna a bio (Imperativo): <span>getBioByIdImperative(id)</span></p>
+
+  <pre>
+    const getBioByIdImperative = (id: number) => {
+      let bio = '';
+      for (let i = 0; i < lista.length; i++) {
+          if (lista[i].id === id) {
+              bio = lista[i].bio;
+              break;
+          }
+      }
+      return bio;
+  }</pre>
+
+  <p>Função que retorna o nome (Funcional): <span>getNameByIdFunctional(id)</span></p>
+
+  <pre>
+    const getNameByIdFunctional = (id: number) => {
+      let people = lista.find(item => item.id === id);
+      let name = people?.name;
+      return name;
+  }</pre>
+
+  <p>Função que retorna o nome (Imperativo): <span>getNameByIdImperative(id)</span></p>
+
+  <pre>
+    const getNameByIdImperative = (id: number) => {
+      let name = '';
+  
+      for (let i = 0; i < lista.length; i++) {
+          if (lista[i].id === id) {
+              name = lista[i].name;
+              break;
+          }
+      }
+      return name;
+  }</pre>
+
+  <p>Função que deleta uma pessoa pelo id (Funcional): <span>deleteByIdFunctional(id)</span></p>
+
+  <pre>
+    const deleteByIdFunctional = (id: number) => {
+      const removePeople = (person: { id: number, name: string, bio: string }) => person.id !== id;
+      return lista.filter(removePeople)
+  }</pre>
+
+  <p>Função que deleta uma pessoa pelo id (Imperativo): <span>deleteByIdImperative(id)</span></p>
+
+  <pre>
+    const deleteByIdImperative = (id: number) => {
+      for (let i = 0; i < lista.length; i++) {
+          if (lista[i].id === id) {
+              lista.splice(i, 1);
+              break;
+          }
+      }
+      return lista
+  }</pre>
+
+  <p>Função que muda o nome ou a bio pelo id (Funcional): <span>changeNameOrBioByIdFunctional(id)</span></p>
+
+  <pre>
+    const updatePerson = (person: { id: number; name: string; bio: string }, name?: string, bio?: string) => {
+      return {
+          ...person,
+          name: name !== undefined ? name : person.name,
+          bio: bio !== undefined ? bio : person.bio
+      };
+  };
+
+    const changeNameOrBioByIdFunctional = (id: number, name?: string, bio?: string) => {
+      const people = lista.find(item => item.id === id);
+  
+      if (!people) {
+          return lista;
+      }
+  
+      const updatedPerson = updatePerson(people, name, bio);
+  
+      return lista.map(person => person.id === id ? updatedPerson : person);
+  };</pre>
+
+  <p>Função que muda o nome ou a bio pelo id (Imperativo): <span>changeNameOrBioByIdImperative(id)</span></p>
+
+  <pre>
+    const changeNameOrBioByIdImperative = (id: number, name?: string, bio?: string) => {
+      for (let i = 0; i < lista.length; i++) {
+          if (lista[i].id === id) {
+              if (name !== undefined) {
+                  lista[i].name = name;
+              }
+              if (bio !== undefined) {
+                  lista[i].bio = bio;
+              }
+          }
+      }
+      return lista
+  }</pre>
+
+
+  <script>
+    // Contador
+    var __assign = (this && this.__assign) || function () {
+      __assign = Object.assign || function (t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+          s = arguments[i];
+          for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+        }
+        return t;
+      };
+      return __assign.apply(this, arguments);
+    };
+    var vowelCounter = function (word) {
+      var counter = 0;
+      var vowels = "aeiouâêîôûáéíóúàèìòùãẽĩõũ";
+      for (var _i = 0, _a = word.toLowerCase(); _i < _a.length; _i++) {
+        var i = _a[_i];
+        if (vowels.includes(i)) {
+          counter += 1;
+        }
+      }
+      return counter;
+    };
+    var form = document.getElementById("form");
+    var input = document.getElementById('word');
+    var resultElement = document.getElementById('result');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var word = input.value;
+      var vowels = vowelCounter(word);
+      resultElement.textContent = 'A palavra tem ' + vowels + ' vogais.';
+    });
+    var lista = [
+      { "id": 1, "name": "Ada Lovelace", "bio": "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina" },
+      { "id": 2, "name": "Alan Turing", "bio": "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial" },
+      { "id": 3, "name": "Nikola Tesla", "bio": "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada." },
+      { "id": 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar." }
+    ];
+    // a) Funcional
+    var getBioByIdFunctional = function (id) {
+      var people = lista.find(function (item) { return item.id === id; });
+      var bio = people === null || people === void 0 ? void 0 : people.bio;
+      return bio;
+    };
+    // a) Imperativo
+    var getBioByIdImperative = function (id) {
+      var bio = '';
+      for (var i = 0; i < lista.length; i++) {
+        if (lista[i].id === id) {
+          bio = lista[i].bio;
+          break;
+        }
+      }
+      return bio;
+    };
+    // b) Funcional
+    var getNameByIdFunctional = function (id) {
+      var people = lista.find(function (item) { return item.id === id; });
+      var name = people === null || people === void 0 ? void 0 : people.name;
+      return name;
+    };
+    // b) Imperativo
+    var getNameByIdImperative = function (id) {
+      var name = '';
+      for (var i = 0; i < lista.length; i++) {
+        if (lista[i].id === id) {
+          name = lista[i].name;
+          break;
+        }
+      }
+      return name;
+    };
+    // c) Funcional
+    var deleteByIdFunctional = function (id) {
+      var removePeople = function (person) { return person.id !== id; };
+      return lista.filter(removePeople);
+    };
+    // c) Imperativo
+    var deleteByIdImperative = function (id) {
+      for (var i = 0; i < lista.length; i++) {
+        if (lista[i].id === id) {
+          lista.splice(i, 1);
+          break;
+        }
+      }
+      return lista;
+    };
+    // d) Funcional
+    var updatePerson = function (person, name, bio) {
+      return __assign(__assign({}, person), { name: name !== undefined ? name : person.name, bio: bio !== undefined ? bio : person.bio });
+    };
+    var changeNameOrBioByIdFunctional = function (id, name, bio) {
+      var people = lista.find(function (item) { return item.id === id; });
+      if (!people) {
+        return lista;
+      }
+      var updatedPerson = updatePerson(people, name, bio);
+      return lista.map(function (person) { return person.id === id ? updatedPerson : person; });
+    };
+    // d) Imperativo
+    var changeNameOrBioByIdImperative = function (id, name, bio) {
+      for (var i = 0; i < lista.length; i++) {
+        if (lista[i].id === id) {
+          if (name !== undefined) {
+            lista[i].name = name;
+          }
+          if (bio !== undefined) {
+            lista[i].bio = bio;
+          }
+        }
+      }
+      return lista;
+    };
+
+  </script>
+</body>
+
+</html>
