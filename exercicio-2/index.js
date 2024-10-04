@@ -18,37 +18,28 @@ var lista = [
 // a) Funcional
 var getBioByIdFunctional = function (id) {
     var people = lista.find(function (item) { return item.id === id; });
-    var bio = people === null || people === void 0 ? void 0 : people.bio;
-    return bio;
+    return people === null || people === void 0 ? void 0 : people.bio;
 };
 // a) Imperativo
 var getBioByIdImperative = function (id) {
-    var bio = '';
     for (var i = 0; i < lista.length; i++) {
         if (lista[i].id === id) {
-            bio = lista[i].bio;
-            break;
+            return lista[i].bio;
         }
     }
-    return bio;
 };
-console.log(getBioByIdImperative(2));
 // b) Funcional
 var getNameByIdFunctional = function (id) {
     var people = lista.find(function (item) { return item.id === id; });
-    var name = people === null || people === void 0 ? void 0 : people.name;
-    return name;
+    return people === null || people === void 0 ? void 0 : people.name;
 };
 // b) Imperativo
 var getNameByIdImperative = function (id) {
-    var name = '';
     for (var i = 0; i < lista.length; i++) {
         if (lista[i].id === id) {
-            name = lista[i].name;
-            break;
+            return lista[i].name;
         }
     }
-    return name;
 };
 // c) Funcional
 var deleteByIdFunctional = function (id) {
@@ -60,25 +51,19 @@ var deleteByIdImperative = function (id) {
     for (var i = 0; i < lista.length; i++) {
         if (lista[i].id === id) {
             lista.splice(i, 1);
-            break;
+            return lista;
         }
     }
-    return lista;
 };
 // d) Funcional
-var updatePerson = function (person, name, bio) {
-    return __assign(__assign({}, person), { name: name !== undefined ? name : person.name, bio: bio !== undefined ? bio : person.bio });
-};
 var changeNameOrBioByIdFunctional = function (id, name, bio) {
-    var people = lista.find(function (item) { return item.id === id; });
-    if (!people) {
-        return lista;
-    }
-    var updatedPerson = updatePerson(people, name, bio);
-    return lista.map(function (person) { return person.id === id ? updatedPerson : person; });
+    return lista.map(function (person) { return person.id === id ? __assign(__assign({}, person), { name: name !== null && name !== void 0 ? name : person.name, bio: bio !== null && bio !== void 0 ? bio : person.bio }) : person; });
 };
 // d) Imperativo
 var changeNameOrBioByIdImperative = function (id, name, bio) {
+    if (name === undefined && bio === undefined) {
+        return lista;
+    }
     for (var i = 0; i < lista.length; i++) {
         if (lista[i].id === id) {
             if (name !== undefined) {
@@ -87,7 +72,7 @@ var changeNameOrBioByIdImperative = function (id, name, bio) {
             if (bio !== undefined) {
                 lista[i].bio = bio;
             }
+            return lista;
         }
     }
-    return lista;
 };
