@@ -163,8 +163,12 @@ document.getElementById('formChangeFuncional')!.addEventListener('submit', funct
   const id = parseInt((document.getElementById('changeIdFunctional') as HTMLInputElement).value);
   const newName = (document.getElementById('newNameFunctional') as HTMLInputElement).value;
   const newBio = (document.getElementById('newBioFunctional') as HTMLInputElement).value;
+  
   lista = changeNameOrBioByIdFunctional(id, newName, newBio);
-  document.getElementById('resultChangeFunctional')!.textContent = 'Pessoa atualizada. Cheque o console para ver a lista atualizada.';
+  document.getElementById('resultChangeFunctional')!.textContent = lista.length > 0
+    ? lista.map(person => `ID: ${person.id}, Nome: ${person.name}, Bio: ${person.bio}`).join(' | ')
+    : 'Nenhuma pessoa encontrada na lista.';
+    
   console.log(lista);
 });
 
@@ -174,8 +178,12 @@ document.getElementById('formChangeImperativo')!.addEventListener('submit', func
   const id = parseInt((document.getElementById('changeIdImperativo') as HTMLInputElement).value);
   const newName = (document.getElementById('newNameImperativo') as HTMLInputElement).value;
   const newBio = (document.getElementById('newBioImperativo') as HTMLInputElement).value;
+  
   lista = changeNameOrBioByIdImperative(id, newName, newBio);
-  document.getElementById('resultChangeImperativo')!.textContent = 'Pessoa atualizada. Cheque o console para ver a lista atualizada.';
+    document.getElementById('resultChangeImperativo')!.textContent = lista.length > 0
+    ? lista.map(person => `ID: ${person.id}, Nome: ${person.name}, Bio: ${person.bio}`).join(' | ')
+    : 'Nenhuma pessoa encontrada na lista.';
+    
   console.log(lista);
 });
 
