@@ -601,7 +601,9 @@ document.getElementById('formChangeFuncional').addEventListener('submit', functi
     var newName = document.getElementById('newNameFunctional').value;
     var newBio = document.getElementById('newBioFunctional').value;
     lista = changeNameOrBioByIdFunctional(id, newName, newBio);
-    document.getElementById('resultChangeFunctional').textContent = 'Pessoa atualizada. Cheque o console para ver a lista atualizada.';
+    document.getElementById('resultChangeFunctional').textContent = lista.length > 0
+        ? lista.map(function (person) { return "ID: ".concat(person.id, ", Nome: ").concat(person.name, ", Bio: ").concat(person.bio); }).join(' | ')
+        : 'Nenhuma pessoa encontrada na lista.';
     console.log(lista);
 });
 // form de alteração (Imperativo)
@@ -611,7 +613,9 @@ document.getElementById('formChangeImperativo').addEventListener('submit', funct
     var newName = document.getElementById('newNameImperativo').value;
     var newBio = document.getElementById('newBioImperativo').value;
     lista = changeNameOrBioByIdImperative(id, newName, newBio);
-    document.getElementById('resultChangeImperativo').textContent = 'Pessoa atualizada. Cheque o console para ver a lista atualizada.';
+    document.getElementById('resultChangeImperativo').textContent = lista.length > 0
+        ? lista.map(function (person) { return "ID: ".concat(person.id, ", Nome: ").concat(person.name, ", Bio: ").concat(person.bio); }).join(' | ')
+        : 'Nenhuma pessoa encontrada na lista.';
     console.log(lista);
 });
 
