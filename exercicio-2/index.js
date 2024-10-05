@@ -61,18 +61,15 @@ var changeNameOrBioByIdFunctional = function (id, name, bio) {
 };
 // d) Imperativo
 var changeNameOrBioByIdImperative = function (id, name, bio) {
-    if (name === undefined && bio === undefined) {
+    if (!name && !bio) {
         return lista;
     }
     for (var i = 0; i < lista.length; i++) {
         if (lista[i].id === id) {
-            if (name !== undefined) {
-                lista[i].name = name;
-            }
-            if (bio !== undefined) {
-                lista[i].bio = bio;
-            }
+            lista[i].name = name ? name : lista[i].name;
+            lista[i].bio = bio ? bio : lista[i].bio;
             return lista;
         }
     }
+    return lista;
 };
